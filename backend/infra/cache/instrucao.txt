@@ -1,0 +1,1 @@
+Esta pasta deve conter as implementações de cache, como Redis ou memória, para otimizar o desempenho da aplicação. 

@@ -1,0 +1,1 @@
+Esta pasta deve conter os casos de uso administrativos, como gerenciamento de usuários, configurações do sistema, etc. 

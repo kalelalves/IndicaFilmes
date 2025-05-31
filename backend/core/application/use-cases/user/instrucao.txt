@@ -1,0 +1,1 @@
+Esta pasta deve conter os casos de uso relacionados a usuários, como criação, atualização, autenticação, etc. 

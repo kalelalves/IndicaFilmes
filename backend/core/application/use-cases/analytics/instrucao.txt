@@ -1,0 +1,1 @@
+Esta pasta deve conter os casos de uso relacionados a análises e métricas do sistema, como estatísticas de uso, relatórios, etc. 

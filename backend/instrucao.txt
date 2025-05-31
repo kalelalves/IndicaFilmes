@@ -1,0 +1,8 @@
+Esta pasta contém o código-fonte do backend da aplicação IndicaFilmes.
+
+Estrutura sugerida:
+- main/: Arquivos principais de inicialização do backend
+- infra/: Implementações de infraestrutura (banco de dados, serviços externos, etc)
+- core/: Lógica de negócio principal
+- src/: Outros arquivos de código-fonte
+- package.json, tsconfig.json: Configurações do projeto Node.js/TypeScript 

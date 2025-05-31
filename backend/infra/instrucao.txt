@@ -1,0 +1,1 @@
+Esta pasta deve conter implementações de infraestrutura, como conexões com banco de dados, serviços externos, provedores de autenticação, etc. 

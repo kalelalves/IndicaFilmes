@@ -1,0 +1,1 @@
+Esta pasta pode conter outros arquivos de código-fonte do backend, como utilitários, helpers, middlewares, etc. 
