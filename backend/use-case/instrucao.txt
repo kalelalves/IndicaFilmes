@@ -1,0 +1,1 @@
+Esta pasta deve conter os casos de uso da aplicação, ou seja, as regras de negócio que representam as ações principais do sistema. 

@@ -1,0 +1,1 @@
+Esta pasta deve conter as entidades do domínio, que são os objetos principais do negócio com suas regras e comportamentos. 

@@ -1,0 +1,1 @@
+Esta pasta deve conter os Data Transfer Objects (DTOs), que são objetos usados para transportar dados entre as camadas da aplicação. 

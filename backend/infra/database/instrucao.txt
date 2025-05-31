@@ -1,0 +1,1 @@
+Esta pasta deve conter as implementações de acesso a banco de dados, incluindo repositórios e configurações de conexão. 
