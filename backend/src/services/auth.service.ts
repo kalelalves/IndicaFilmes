@@ -8,7 +8,7 @@ import {
   UserLoginResponseDTO,
   UserResponseDTO,
 } from "../schemas/user.schema";
-import { InvalidPasswordError, UserNotFoundError } from "../errors/user.error";
+import { BadRequestError } from "../errors/HttpError";
 
 const authService = {
   register: async (data: CreateUserDTO): Promise<UserResponseDTO> => {
@@ -29,13 +29,13 @@ const authService = {
     const user = await userRepository.findByEmail(data.email);
 
     if (!user) {
-      throw new UserNotFoundError();
+      throw new BadRequestError("Senha e/ou email inválidos");
     }
 
     const isPasswordValid = await bcrypt.compare(data.password, user?.password);
 
     if (!isPasswordValid) {
-      throw new InvalidPasswordError();
+      throw new BadRequestError("Senha e/ou email inválidos");
     }
 
     return {

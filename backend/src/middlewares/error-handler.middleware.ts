@@ -1,7 +1,7 @@
 import { StatusCodes } from "http-status-codes";
 import { ErrorRequestHandler } from "express";
 import { ZodError } from "zod";
-import { DomainError } from "../errors/domain-error.error";
+import { HttpError } from "../errors/HttpError";
 
 export const errorHandler: ErrorRequestHandler = async (
   err,
@@ -21,7 +21,7 @@ export const errorHandler: ErrorRequestHandler = async (
       return;
     }
 
-    if (err instanceof DomainError) {
+    if (err instanceof HttpError) {
       res.status(err.status).json({
         success: false,
         message: err.message,
