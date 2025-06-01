@@ -1,1 +1,0 @@
-Esta pasta deve conter a lógica de negócio principal da aplicação, como entidades, casos de uso, regras de negócio e serviços centrais. 

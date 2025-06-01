@@ -1,1 +1,0 @@
-Esta pasta deve conter as fábricas de objetos da aplicação, responsáveis por criar e configurar as instâncias das classes principais. 

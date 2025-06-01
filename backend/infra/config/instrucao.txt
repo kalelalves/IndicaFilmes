@@ -1,1 +1,0 @@
-Esta pasta deve conter as configurações da infraestrutura, como variáveis de ambiente, configurações de serviços externos, etc. 

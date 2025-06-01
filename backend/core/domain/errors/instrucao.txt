@@ -1,1 +1,0 @@
-Esta pasta deve conter as classes de erro personalizadas do domínio, que representam situações de erro específicas do negócio. 

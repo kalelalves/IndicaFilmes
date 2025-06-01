@@ -1,1 +1,0 @@
-Esta pasta deve conter os objetos de valor (value objects) do domínio, que são objetos imutáveis que representam conceitos descritivos do negócio. 

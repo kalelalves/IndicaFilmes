@@ -1,1 +1,0 @@
-Esta pasta deve conter os serviços do domínio, que implementam operações complexas que envolvem múltiplas entidades ou regras de negócio. 

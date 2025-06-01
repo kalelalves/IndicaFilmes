@@ -1,1 +1,0 @@
-Esta pasta deve conter os casos de uso relacionados à autenticação e autorização, como login, registro, recuperação de senha, etc. 

@@ -1,1 +1,0 @@
-Esta pasta deve conter os casos de uso da aplicação, organizados por contexto (user, movie, admin, etc), que implementam as ações principais do sistema. 

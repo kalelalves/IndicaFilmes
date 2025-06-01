@@ -1,1 +1,0 @@
-Esta pasta deve conter as interfaces (ports) que definem os contratos para comunicação com o mundo exterior, como repositórios e serviços externos. 
