@@ -13,6 +13,17 @@ const authController = {
         .json({ message: "Occured an error" });
     }
   },
+
+  login: async (req: Request, res: Response) => {
+    try {
+      const user = await authService.login(req.body);
+      res.status(StatusCodes.OK).json(user);
+    } catch (error) {
+      res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ message: "Occured an error" });
+    }
+  },
 };
 
 export default authController;

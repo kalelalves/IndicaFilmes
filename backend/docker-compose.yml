@@ -1,8 +1,11 @@
-version: "3.8"
-
 services:
   api:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
     ports:
       - "3000:3000"
     environment:
@@ -10,9 +13,6 @@ services:
       - PORT=3000
     depends_on:
       - mongo
-    volumes:
-      - .:/usr/src/app
-      - /usr/src/app/node_modules
 
   mongo:
     image: mongo:6.0

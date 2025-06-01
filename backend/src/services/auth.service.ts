@@ -1,6 +1,12 @@
 import bcrypt from "bcrypt";
-import { CreateUserDTO, UserResponseDTO } from "../dtos/user.dto";
-import authRepository from "../repositories/auth.repository";
+import { sign } from "../utils/jwt";
+import {
+  CreateUserDTO,
+  LoginUserDTO,
+  UserLoginResponseDTO,
+  UserResponseDTO,
+} from "../dtos/user.dto";
+import userRepository from "../repositories/user.repository";
 import { IUser } from "../models/User";
 
 const authService = {
@@ -13,9 +19,29 @@ const authService = {
       password: hashedPassword,
     };
 
-    const created = await authRepository.register(user);
+    const created = await userRepository.create(user);
 
     return { name: created.name, email: created.email };
+  },
+
+  login: async (data: LoginUserDTO): Promise<UserLoginResponseDTO> => {
+    const user = await userRepository.findByEmail(data.email);
+
+    if (!user) {
+      throw new Error("Usuário não encontrado");
+    }
+
+    const isPasswordValid = await bcrypt.compare(data.password, user?.password);
+
+    if (!isPasswordValid) {
+      throw new Error("A senha informada é inválida");
+    }
+
+    return {
+      name: user.name,
+      email: user.email,
+      token: sign({ id: user._id.toString(), email: user.email }),
+    };
   },
 };
 
