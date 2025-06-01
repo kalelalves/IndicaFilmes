@@ -1,13 +1,13 @@
 import bcrypt from "bcrypt";
 import { sign } from "../utils/jwt";
+import userRepository from "../repositories/user.repository";
+import { IUser } from "../models/User";
 import {
   CreateUserDTO,
   LoginUserDTO,
   UserLoginResponseDTO,
   UserResponseDTO,
-} from "../dtos/user.dto";
-import userRepository from "../repositories/user.repository";
-import { IUser } from "../models/User";
+} from "../schemas/user.schema";
 
 const authService = {
   register: async (data: CreateUserDTO): Promise<UserResponseDTO> => {
