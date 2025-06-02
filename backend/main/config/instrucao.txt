@@ -1,0 +1,1 @@
+Esta pasta deve conter as configurações principais da aplicação, como configurações de ambiente, logging, etc. 
