@@ -1,14 +1,26 @@
-import express, { Request, Response } from "express";
+import express from "express";
+import authRoutes from "./routes/auth.routes";
+import { connectDB } from "./config/database";
+import dotenv from "dotenv";
+import { errorHandler } from "./middlewares/error-handler.middleware";
+
+dotenv.config();
 
 const app = express();
-const port = process.env.SERVER_PORT || 3000;
+const PORT = process.env.SERVER_PORT || 3000;
 
 app.use(express.json());
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Hello from TypeScript + Express!");
-});
+app.use(authRoutes);
 
-app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
-});
+app.use(errorHandler);
+
+const startServer = async () => {
+  await connectDB();
+
+  app.listen(PORT, () => {
+    console.log(`Servidor rodando na porta ${PORT}`);
+  });
+};
+
+startServer();
