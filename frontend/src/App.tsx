@@ -1,5 +1,9 @@
-import React from "react";
+import { Login } from "./components/Login/Login";
 
 export function App() {
-  return <p>Hello World</p>;
+  return (
+    <div>
+      <Login />
+    </div>
+  );
 }

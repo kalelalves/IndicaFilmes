@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './TextField.module.css';
 
 interface TextFieldProps {
     label: string;
@@ -9,7 +10,7 @@ interface TextFieldProps {
 
 export const TextField: React.FC<TextFieldProps> = ({ label, placeholder, value, onChange }) => {
     return (
-        <div className="text_field">
+        <div className={styles.field_text}>
             <label htmlFor={label}>{label}</label>
             <input
                 type="text"
