@@ -11,11 +11,12 @@ interface TextFieldProps {
 export const TextField: React.FC<TextFieldProps> = ({ label, placeholder, value, onChange }) => {
     return (
         <div className={styles.field_text}>
-            <label htmlFor={label}>{label}</label>
+            <label>{label}</label>
             <input
                 type="text"
                 placeholder={placeholder}
-                value={value} onChange={(e) => onChange(e.target.value)}
+                value={value}
+                onChange={(e) => onChange(e.target.value)}
             />
         </div>
     );
