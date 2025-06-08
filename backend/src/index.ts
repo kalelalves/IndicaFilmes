@@ -1,5 +1,5 @@
 import express from "express";
-import authRoutes from "./routes/auth.routes";
+import appRouter from "./routes/app-router.routes";
 import { connectDB } from "./config/database";
 import dotenv from "dotenv";
 import cors from "cors";
@@ -15,7 +15,7 @@ app.use(cors(corsOptions));
 
 app.use(express.json());
 
-app.use(authRoutes);
+app.use("/api", appRouter);
 
 app.use(errorHandler);
 
