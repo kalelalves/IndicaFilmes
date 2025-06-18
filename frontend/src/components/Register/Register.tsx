@@ -37,29 +37,31 @@ export function Register() {
     }
   };
 
-  return (
+ return (
+  <div className={styles.register}>
+    <h1>Registre-se</h1>
     <form onSubmit={handleSubmit} className={styles.form}>
-      <h2>Cadastro</h2>
       <TextField
-        label='Nome'
-        placeholder='Digite seu nome'
+        label="Nome"
+        placeholder="Digite seu nome"
         value={name}
         onChange={setName}
       />
       <TextField
-        label='Email'
-        placeholder='Digite seu email'
+        label="Email"
+        placeholder="Digite seu email"
         value={email}
         onChange={setEmail}
       />
       <TextField
-        label='Senha'
-        placeholder='Digite sua senha'
+        label="Senha"
+        placeholder="Digite sua senha"
         value={password}
         onChange={setPassword}
       />
       <Button>Registrar</Button>
       {message && <p>{message}</p>}
     </form>
-  );
+  </div>
+);
 }

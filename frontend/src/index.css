@@ -1,11 +1,8 @@
-@import "tailwindcss";
-
-@theme {
-  --color-*: initial;
-  --color-white: #ffffff;
-  --color-violet-light: #B47DF0;
-  --color-violet-gray: #A292B3;
-  --color-violet-medium: #7B55A3;
-  --color-violet-soft: #E1C9F0;
-  --color-violet-dark: #543A70;
+:root {
+  --white: #ffffff;
+  --violet-light: #B47DF0;
+  --violet-gray: #A292B3;
+  --violet-medium: #7B55A3;
+  --violet-soft: #E1C9F0;
+  --violet-dark: #543A70;
 }
