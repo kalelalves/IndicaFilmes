@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Button } from '../Button/Button';
-import { TextField } from '../TextField/TextField';
 import styles from './Login.module.css';
 import { api } from '../../handlers/user/userService';
 import { useNavigate } from 'react-router-dom';
+import { InputText } from '../InputText/InputText';
 
 interface Login {
   message: string;
@@ -41,13 +41,13 @@ export const Login = () => {
     <div className={styles.login}>
       <h1>Faça login na sua conta</h1>
       <form onSubmit={handleSubmit}>
-        <TextField
+        <InputText
           label="Email"
           placeholder="Digite seu email"
           value={email}
           onChange={setEmail}
         />
-        <TextField
+        <InputText
           label="Senha"
           placeholder="Digite sua senha"
           value={password}
