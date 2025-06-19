@@ -34,13 +34,28 @@ export const InputText: React.FC<InputTextProps> = ({
   disabled,
   className,
   onChange,
+  label,
+  id,
   ...props
 }) => {
+  const inputId = id || `input-${label?.toLowerCase().replace(/\s/g, '-')}`;
+
   return (
-    <input
-      className={cx(inputTextVariants({ size, disabled }), className)}
-      onChange={onChange ? (e) => onChange(e.target.value) : undefined}
-      {...props}
-    />
+    <div className="flex flex-col gap-1 w-full">
+      {label && (
+        <label
+          htmlFor={inputId}
+          className="text-sm font-medium text-violet-700"
+        >
+          {label}
+        </label>
+      )}
+      <input
+        id={inputId}
+        className={cx(inputTextVariants({ size, disabled }), className)}
+        onChange={onChange ? (e) => onChange(e.target.value) : undefined}
+        {...props}
+      />
+    </div>
   );
 };
