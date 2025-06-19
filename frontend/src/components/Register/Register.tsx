@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextField } from '../TextField/TextField';
+import { InputText } from '../InputText/InputText';
 import { Button } from '../Button/Button';
 import { api } from '../../handlers/user/userService';
 import styles from './Register.module.css';
@@ -40,19 +40,19 @@ export function Register() {
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
       <h2>Cadastro</h2>
-      <TextField
+      <InputText
         label='Nome'
         placeholder='Digite seu nome'
         value={name}
         onChange={setName}
       />
-      <TextField
+      <InputText
         label='Email'
         placeholder='Digite seu email'
         value={email}
         onChange={setEmail}
       />
-      <TextField
+      <InputText
         label='Senha'
         placeholder='Digite sua senha'
         value={password}
