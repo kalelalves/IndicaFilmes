@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { InputText } from '../InputText/InputText';
 import { Button } from '../Button/Button';
 import { Text } from '../Text/Text';
-import styles from './Login.module.css';
 import { Link } from 'react-router-dom';
 
 interface Login {
@@ -46,8 +45,8 @@ export const Login = () => {
   };
 
   return (
-    <div className={styles.login}>
-      <Text as="h1" variant="body-md-bold" className={styles.title}>
+    <div className="flex flex-col items-center justify-center h-screen p-4">
+      <Text as="h1" variant="body-md-bold">
         Faça login na sua conta
       </Text>
 

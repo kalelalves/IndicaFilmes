@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { api } from "../../handlers/user/userService";
 import { Text } from "../Text/Text";
 import { Button } from "../Button/Button";
-import styles from "./Register.module.css";
 import { InputText } from "../InputText/InputText";
 
 interface Register {
@@ -48,8 +47,8 @@ export function Register() {
   };
 
   return (
-    <div className={styles.register}>
-      <form onSubmit={handleSubmit} className={styles.form}>
+    <div className="flex flex-col items-center justify-center h-screen p-4">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full max-w-md">
         <Text>Registre-se</Text>
 
         <InputText
