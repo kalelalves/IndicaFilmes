@@ -15,6 +15,7 @@ export function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [status, setStatus] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
 
   const fetchRegister = async (registerData: {
@@ -31,6 +32,7 @@ export function Register() {
 
     try {
       const response = await fetchRegister({ name, email, password });
+      setStatus(true);
       setMessage(
         `Cadastro realizado com sucesso! Bem-vindo, ${response.name} (${response.email})`
       );
@@ -38,8 +40,9 @@ export function Register() {
       setEmail("");
       setPassword("");
     } catch (error: any) {
+      setStatus(true);
       setMessage(
-        error.response?.data?.message || "Erro ao cadastrar. Tente novamente."
+        error.response?.data?.message
       );
     }
   };
@@ -70,7 +73,13 @@ export function Register() {
 
         <Button>Registrar</Button>
 
-        {message && <p>{message}</p>}
+        {status && (
+        <p
+          className={`mt-2 ${status ? "text-green-400" : "text-red-400"}`}
+        >
+          {message}
+        </p>
+      )}
       </form>
     </div>
   );
