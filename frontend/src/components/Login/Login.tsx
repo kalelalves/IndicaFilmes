@@ -20,7 +20,7 @@ export const Login = () => {
 
   const fetchLogin = async (loginData: { email: string; password: string }) => {
     try {
-      const response = await api.post<Login>(`/login`, loginData);
+      const response = await api.post<Login>(`/auth/login`, loginData);
 
       setStatus(true);
       setMessage("Login realizado com sucesso!");
@@ -62,6 +62,7 @@ export const Login = () => {
           placeholder="Digite sua senha"
           value={password}
           onChange={setPassword}
+          type="password"
         />
         <Button>Entrar</Button>
       </form>

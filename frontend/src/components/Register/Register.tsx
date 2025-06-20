@@ -22,7 +22,7 @@ export function Register() {
     email: string;
     password: string;
   }) => {
-    const response = await api.post<Register>("/register", registerData);
+    const response = await api.post<Register>("/auth/register", registerData);
     return response.data;
   };
 
@@ -68,6 +68,7 @@ export function Register() {
           placeholder="Digite sua senha"
           value={password}
           onChange={setPassword}
+          type="password"
         />
 
         <Button>Registrar</Button>

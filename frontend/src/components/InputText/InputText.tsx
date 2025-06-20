@@ -27,6 +27,7 @@ interface InputTextProps
   label?: string;
   placeholder?: string;
   onChange?: (value: string) => void;
+  type?: string;
 }
 
 export const InputText: React.FC<InputTextProps> = ({
@@ -36,6 +37,7 @@ export const InputText: React.FC<InputTextProps> = ({
   onChange,
   label,
   id,
+  type,
   ...props
 }) => {
   const inputId = id || `input-${label?.toLowerCase().replace(/\s/g, '-')}`;
@@ -54,6 +56,7 @@ export const InputText: React.FC<InputTextProps> = ({
         id={inputId}
         className={cx(inputTextVariants({ size, disabled }), className)}
         onChange={onChange ? (e) => onChange(e.target.value) : undefined}
+        type={type || "text"}
         {...props}
       />
     </div>
