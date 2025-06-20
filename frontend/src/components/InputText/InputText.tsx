@@ -34,11 +34,12 @@ export const InputText: React.FC<InputTextProps> = ({
   disabled,
   className,
   onChange,
+  type,
   label,
   id,
   ...props
 }) => {
-  const inputId = id || `input-${label?.toLowerCase().replace(/\s/g, '-')}`;
+  const inputId = id || `input-${label?.toLowerCase().replace(/\s/g, "-")}`;
 
   return (
     <div className="flex flex-col gap-1 w-full">
@@ -54,6 +55,7 @@ export const InputText: React.FC<InputTextProps> = ({
         id={inputId}
         className={cx(inputTextVariants({ size, disabled }), className)}
         onChange={onChange ? (e) => onChange(e.target.value) : undefined}
+        type={type}
         {...props}
       />
     </div>

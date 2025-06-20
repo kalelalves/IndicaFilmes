@@ -6,7 +6,7 @@ export function App() {
   return (
     <BrowserRouter>
       <Login />
-      {/* <Register /> */}
+      <Register />
     </BrowserRouter>
   );
 }
