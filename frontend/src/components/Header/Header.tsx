@@ -19,6 +19,45 @@ const menuItems: MenuItem[] = [
   { label: "Navegar por idiomas", path: "/idiomas", private: true },
 ];
 
+const Menu: React.FC<{ isAuthenticated: boolean }> = ({ isAuthenticated }) => (
+  <nav>
+    <ul className="flex gap-4">
+      {menuItems
+        .filter((item) => (item.private ? isAuthenticated : true))
+        .map((item) => (
+          <li key={item.path}>
+            <Link to={item.path} className="hover:underline">
+              {item.label}
+            </Link>
+          </li>
+        ))}
+    </ul>
+  </nav>
+);
+
+const UserActions: React.FC<{ isAuthenticated: boolean }> = ({ isAuthenticated }) => (
+  <>
+    {isAuthenticated ? (
+      <>
+        <button aria-label="Buscar" title="Buscar">Pesquisar</button>
+        <span>Infantil</span>
+        <button aria-label="Notificações" title="Notificações">Notificações</button>
+        <div className="w-4 h-4 bg-white rounded-sm flex items-center justify-center">
+          <span className="sr-only">Avatar</span>
+          <img src="/avatar.png" alt="Avatar" className="w-full h-full object-cover rounded-sm" />
+        </div>
+      </>
+    ) : (
+      <>
+        <span>Idiomas</span>
+        <Link to="/login" className="hover:underline">
+          Entrar
+        </Link>
+      </>
+    )}
+  </>
+);
+
 export const Header: React.FC<HeaderProps> = ({ isAuthenticated }) => {
   const location = useLocation();
   const isAuthPage = ["/login", "/register"].includes(location.pathname);
@@ -30,42 +69,10 @@ export const Header: React.FC<HeaderProps> = ({ isAuthenticated }) => {
           <Link to="/" className="font-bold">
             LOGO
           </Link>
-
-          {!isAuthPage && (
-            <nav>
-              <ul className="flex gap-4">
-                {menuItems
-                  .filter((item) => (item.private ? isAuthenticated : true))
-                  .map((item) => (
-                    <li key={item.path}>
-                      <Link to={item.path} className="hover:underline">
-                        {item.label}
-                      </Link>
-                    </li>
-                  ))}
-              </ul>
-            </nav>
-          )}
+          {!isAuthPage && <Menu isAuthenticated={isAuthenticated} />}
         </div>
-
         <div className="flex items-center gap-4">
-          {!isAuthPage && isAuthenticated && (
-            <>
-              <button title="Buscar">Pesquisar</button>
-              <span>Infantil</span>
-              <button title="Notificações">Notificações</button>
-              <div className="w-4 h-4 bg-white rounded-sm">Avatar</div>
-            </>
-          )}
-
-          {!isAuthenticated && !isAuthPage && (
-            <>
-              <span>Idiomas</span>
-              <Link to="/login" className="hover:underline">
-                Entrar
-              </Link>
-            </>
-          )}
+          {!isAuthPage && <UserActions isAuthenticated={isAuthenticated} />}
         </div>
       </div>
     </header>

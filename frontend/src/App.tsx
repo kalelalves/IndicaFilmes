@@ -8,6 +8,7 @@ export function App() {
   const isAuthenticated = false;
 
   return (
+    <div className="bg-red-500 text-white p-4">
     <BrowserRouter>
       <Header isAuthenticated={isAuthenticated} />
       <Routes>
@@ -15,5 +16,7 @@ export function App() {
         <Route path="/register" element={<Register />} />
       </Routes>
     </BrowserRouter>
+
+    </div>
   );
 }
