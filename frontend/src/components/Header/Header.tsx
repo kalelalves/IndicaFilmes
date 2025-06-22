@@ -6,7 +6,7 @@ interface HeaderProps {
 }
 
 export const Header: React.FC<HeaderProps> = ({ isAuthenticated }) => (
-  <header className="w-full px-8 py-4 flex justify-between items-center bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] shadow-md">
+  <header className="w-full px-8 py-4 flex justify-between items-center bg-[var(--color-bg-primary)/90] text-[var(--color-text-primary)] backdrop-blur-md border-b border-[var(--color-bg-primary)]">
     <Menu isAuthenticated={isAuthenticated} />
     <UserActions isAuthenticated={isAuthenticated} />
   </header>

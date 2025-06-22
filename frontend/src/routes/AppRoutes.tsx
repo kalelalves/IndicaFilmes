@@ -1,8 +1,7 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import { Header } from "../components/Header/Header";
-import { Login } from "../components/Login/Login";
-import { Register } from "../components/Register/Register";
-
+import { Login } from "../pages/Login/Login";
+import { Register } from "../pages/Register/Register";
 
 interface AppRoutesProps {
   isAuthenticated: boolean;
