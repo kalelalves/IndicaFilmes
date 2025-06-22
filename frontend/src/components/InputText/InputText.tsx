@@ -1,46 +1,53 @@
-import { cva, cx, type VariantProps } from "class-variance-authority";
+import React from "react";
 
-export const inputTextVariants = cva(
-  `
-    border-b border-solid border-gray-200 focus:border-pink-base
-    bg-transparent outline-none
-  `,
-  {
-    variants: {
-      size: {
-        md: "pb-2 px-2",
-      },
-      disabled: {
-        true: "pointer-events-none",
-      },
-    },
-    defaultVariants: {
-      size: "md",
-      disabled: false,
-    },
-  }
-);
-
-interface InputTextProps
-  extends VariantProps<typeof inputTextVariants>,
-    Omit<React.ComponentProps<"input">, "size" | "disabled" | "onChange"> {
+interface InputTextProps {
   label?: string;
   placeholder?: string;
   onChange?: (value: string) => void;
+  id?: string;
+  className?: string;
+  disabled?: boolean;
 }
 
 export const InputText: React.FC<InputTextProps> = ({
-  size,
-  disabled,
-  className,
+  label,
+  placeholder,
+  className = "",
+  id,
   onChange,
+  disabled,
   ...props
 }) => {
+  const inputId = id || `input-${label?.toLowerCase().replace(/\s/g, '-') || crypto.randomUUID()}`;
+
   return (
-    <input
-      className={cx(inputTextVariants({ size, disabled }), className)}
-      onChange={onChange ? (e) => onChange(e.target.value) : undefined}
-      {...props}
-    />
+    <div className="flex flex-col gap-1 w-full">
+      {label && (
+        <label
+          htmlFor={inputId}
+          className="text-sm font-medium text-[var(--color-text-secondary)]"
+        >
+          {label}
+        </label>
+      )}
+      <input
+        id={inputId}
+        placeholder={placeholder}
+        disabled={disabled}
+        onChange={onChange ? (e) => onChange(e.target.value) : undefined}
+        className={`
+          border-b border-solid 
+          border-[var(--color-bg-interactive)] 
+          focus:border-[var(--color-accent-pink)] 
+          bg-transparent outline-none 
+          pb-2 px-2 transition-colors
+          text-[var(--color-text-primary)]
+          placeholder-[var(--color-text-tertiary)]
+          ${disabled ? "opacity-50 pointer-events-none" : ""}
+          ${className}
+        `}
+        {...props}
+      />
+    </div>
   );
 };
