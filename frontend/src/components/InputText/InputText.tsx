@@ -1,16 +1,63 @@
 import React from "react";
 
-interface TextInlineProps extends React.HTMLAttributes<HTMLSpanElement> {
-  children: React.ReactNode;
+interface InputTextProps
+  extends Omit<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    "size" | "onChange"
+  > {
+  label?: string;
+  placeholder?: string;
+  onChange?: (value: string) => void;
+  id?: string;
+  disabled?: boolean;
+  type?: React.HTMLInputTypeAttribute;
 }
 
-export const TextInline: React.FC<TextInlineProps> = ({ children, className = "", ...props }) => {
+export const InputText: React.FC<InputTextProps> = ({
+  label,
+  placeholder,
+  className = "",
+  id,
+  onChange,
+  disabled,
+  type = "text",
+  ...props
+}) => {
+  const inputId =
+    id ||
+    `input-${label?.toLowerCase().replace(/\s/g, "-") || crypto.randomUUID()}`;
+
   return (
-    <span
-      className={`text-base text-[var(--color-text-primary)] ${className}`}
-      {...props}
-    >
-      {children}
-    </span>
+    <div className="flex flex-col gap-1 w-full">
+      {label && (
+        <label
+          htmlFor={inputId}
+          className="text-sm font-medium mb-2 text-[var(--color-text-secondary)]"
+        >
+          {label}
+        </label>
+      )}
+      <input
+        id={inputId}
+        placeholder={placeholder}
+        type={type}
+        disabled={disabled}
+        onChange={onChange ? (e) => onChange(e.target.value) : undefined}
+        className={`
+    border border-solid 
+    border-[var(--color-bg-interactive)] 
+    focus:border-[var(--color-accent-pink)] 
+    bg-[var(--color-bg-secondary)] 
+    outline-none 
+    px-4 py-3 rounded-md 
+    text-[var(--color-text-primary)]
+    placeholder-[var(--color-text-tertiary)] 
+    transition-colors
+    ${disabled ? "opacity-50 pointer-events-none" : ""}
+    ${className}
+  `}
+        {...props}
+      />
+    </div>
   );
 };
