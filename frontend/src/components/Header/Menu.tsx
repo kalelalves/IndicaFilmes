@@ -12,21 +12,31 @@ const menuItems: MenuItem[] = [
   { label: "Filmes", path: "/filmes", private: true },
   { label: "Bombando", path: "/bombando", private: true },
   { label: "Minha lista", path: "/minha-lista", private: true },
-  { label: "Navegar por idiomas", path: "/idiomas", private: true },
 ];
 
-export const Menu: React.FC<{ isAuthenticated: boolean }> = ({ isAuthenticated }) => (
-  <nav>
-    <ul className="flex gap-4">
-      {menuItems
-        .filter((item) => (item.private ? isAuthenticated : true))
-        .map((item) => (
-          <li key={item.path}>
-            <Link to={item.path} className="hover:underline">
-              {item.label}
-            </Link>
-          </li>
-        ))}
-    </ul>
-  </nav>
-);
+export const Menu: React.FC<{ isAuthenticated: boolean }> = ({ isAuthenticated }) => {
+  return (
+    <div className="flex items-center gap-6">
+      <Link to="/" className="text-2xl font-bold text-[var(--color-text-primary)]">
+        Logo
+      </Link>
+
+      {isAuthenticated && (
+        <nav>
+          <ul className="flex gap-6 text-lg">
+            {menuItems.map((item) => (
+              <li key={item.path}>
+                <Link
+                  to={item.path}
+                  className="text-[var(--color-text-primary)] hover:text-[var(--color-accent-pink)] transition-colors"
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )}
+    </div>
+  );
+};

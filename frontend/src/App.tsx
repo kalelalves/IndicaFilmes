@@ -1,22 +1,12 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Login } from "./components/Login/Login";
-import { Register } from "./components/Register/Register";
-import { Header } from "./components/Header/Header";
+import { BrowserRouter } from "react-router-dom";
+import { AppRoutes } from "./routes/AppRoutes";
 
 export function App() {
-  //Temporary placeholder for authentication status
-  const isAuthenticated = false;
+  const isAuthenticated = false; // ainda hardcoded
 
   return (
-    <div className="bg-red-500 text-white p-4">
     <BrowserRouter>
-      <Header isAuthenticated={isAuthenticated} />
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-      </Routes>
+      <AppRoutes isAuthenticated={isAuthenticated} />
     </BrowserRouter>
-
-    </div>
   );
 }
