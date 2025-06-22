@@ -1,70 +1,17 @@
-import { cva, type VariantProps } from 'class-variance-authority';
+import React from "react";
 
-export const buttonVariants = cva(
-  `
-    flex items-center justify-center cursor-pointer
-    transition rounded-lg group gap-2
-  `,
-  {
-    variants: {
-      variant: {
-        primary: "bg-gray-200 hover:bg-pink-light",
-      },
-      size: {
-        md: "h-14 py-4 px-5",
-      },
-      disabled: {
-        true: "opacity-50 pointer-events-none",
-      },
-      handling: {
-        true: "pointer-events-none",
-      },
-    },
-    defaultVariants: {
-      variant: "primary",
-      size: "md",
-      disabled: false,
-      handling: false,
-    },
-  }
-);
-
-export const buttonTextVariants = cva("", {
-  variants: {
-    variant: {
-      primary: "text-gray-400",
-    },
-  },
-  defaultVariants: {
-    variant: "primary",
-  },
-});
-
-interface ButtonProps
-  extends Omit<React.ComponentProps<"button">, "size" | "disabled">,
-    VariantProps<typeof buttonVariants> {
-  handling?: boolean;
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  children: React.ReactNode;
 }
 
-export const Button: React.FC<ButtonProps> = ({
-  variant,
-  size,
-  disabled,
-  className,
-  children,
-  handling,
-  ...props
-}) => {
+export const Button: React.FC<ButtonProps> = ({ children, className = "", ...props }) => {
   return (
     <button
-      className={buttonVariants({
-        variant,
-        size,
-        handling,
-        className,
-        disabled,
-      })}
-      disabled={disabled || handling}
+      className={`
+        px-5 py-3 rounded-lg font-semibold text-[var(--color-text-primary)]
+        bg-[var(--color-accent-cyan)] hover:bg-[var(--color-accent-pink)]
+        transition duration-200 ease-in-out ${className}
+      `}
       {...props}
     >
       {children}
