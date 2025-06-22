@@ -1,10 +1,20 @@
-import React from 'react';
-import styles from './Button.module.css';
+import React from "react";
 
-interface ButtonProps {
-    children: React.ReactNode;
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  children: React.ReactNode;
 }
 
-export const Button: React.FC<ButtonProps> = ({ children }) => {
-    return <button className={styles.button}>{children}</button>;
+export const Button: React.FC<ButtonProps> = ({ children, className = "", ...props }) => {
+  return (
+    <button
+      className={`
+        px-5 py-3 rounded-lg font-semibold text-[var(--color-text-primary)]
+        bg-[var(--color-accent-cyan)] hover:bg-[var(--color-accent-pink)]
+        transition duration-200 ease-in-out ${className}
+      `}
+      {...props}
+    >
+      {children}
+    </button>
+  );
 };

@@ -1,23 +1,28 @@
-import React, { useState } from 'react';
-import { InputText } from '../InputText/InputText';
-import { Button } from '../Button/Button';
-import { api } from '../../handlers/user/userService';
-import styles from './Register.module.css';
+import React, { useState } from "react";
+import { api } from "../../handlers/user/userService";
+import { Text } from "../Text/Text";
+import { Button } from "../Button/Button";
+import { InputText } from "../InputText/InputText";
 
 interface Register {
   name: string;
   email: string;
-  password: string
+  password: string;
 }
 
 export function Register() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [status, setStatus] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
 
-  const fetchRegister = async (registerData: { name: string; email: string; password: string }) => {
-    const response = await api.post<Register>('/register', registerData);
+  const fetchRegister = async (registerData: {
+    name: string;
+    email: string;
+    password: string;
+  }) => {
+    const response = await api.post<Register>("/auth/register", registerData);
     return response.data;
   };
 
@@ -26,40 +31,56 @@ export function Register() {
 
     try {
       const response = await fetchRegister({ name, email, password });
-      setMessage(`Cadastro realizado com sucesso! Bem-vindo, ${response.name} (${response.email})`);
-      setName('');
-      setEmail('');
-      setPassword('');
-    } catch (error: any) {
+      setStatus(true);
       setMessage(
-        error.response?.data?.message || 'Erro ao cadastrar. Tente novamente.'
+        `Cadastro realizado com sucesso! Bem-vindo, ${response.name} (${response.email})`
+      );
+      setName("");
+      setEmail("");
+      setPassword("");
+    } catch (error: any) {
+      setStatus(true);
+      setMessage(
+        error.response?.data?.message
       );
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className={styles.form}>
-      <h2>Cadastro</h2>
-      <InputText
-        label='Nome'
-        placeholder='Digite seu nome'
-        value={name}
-        onChange={setName}
-      />
-      <InputText
-        label='Email'
-        placeholder='Digite seu email'
-        value={email}
-        onChange={setEmail}
-      />
-      <InputText
-        label='Senha'
-        placeholder='Digite sua senha'
-        value={password}
-        onChange={setPassword}
-      />
-      <Button>Registrar</Button>
-      {message && <p>{message}</p>}
-    </form>
+    <div className="flex flex-col items-center justify-center h-screen p-4">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full max-w-md">
+        <Text>Registre-se</Text>
+
+        <InputText
+          label="Nome"
+          placeholder="Digite seu nome"
+          value={name}
+          onChange={setName}
+        />
+        <InputText
+          label="Email"
+          placeholder="Digite seu email"
+          value={email}
+          onChange={setEmail}
+        />
+        <InputText
+          label="Senha"
+          placeholder="Digite sua senha"
+          value={password}
+          onChange={setPassword}
+          type="password"
+        />
+
+        <Button>Registrar</Button>
+
+        {status && (
+        <p
+          className={`mt-2 ${status ? "text-green-400" : "text-red-400"}`}
+        >
+          {message}
+        </p>
+      )}
+      </form>
+    </div>
   );
 }
