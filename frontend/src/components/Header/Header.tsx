@@ -5,12 +5,9 @@ interface HeaderProps {
   isAuthenticated: boolean;
 }
 
-export const Header: React.FC<HeaderProps> = ({ isAuthenticated }) => {
-
-  return (
-    <header className="w-full bg-purple-800 text-white px-6 py-2 text-sm">
-      <Menu isAuthenticated={isAuthenticated} />
-      <UserActions isAuthenticated={isAuthenticated} />
-    </header>
-  );
-};
+export const Header: React.FC<HeaderProps> = ({ isAuthenticated }) => (
+  <header className="w-full px-8 py-4 flex justify-between items-center bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] shadow-md">
+    <Menu isAuthenticated={isAuthenticated} />
+    <UserActions isAuthenticated={isAuthenticated} />
+  </header>
+);

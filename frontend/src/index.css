@@ -3,17 +3,40 @@
 @tailwind utilities;
 
 :root {
-  --color-white: #ffffff;
-  --color-gray-100: #f7f3f6;
-  --color-gray-200: #f4e6f0;
-  --color-gray-300: #7a6e76;
-  --color-gray-400: #332e32;
-  --color-green-light: #cddfcc;
-  --color-green-base: #52a350;
-  --color-green-dark: #2f5c2d;
-  --color-pink-light: #e9cce1;
-  --color-pink-base: #c257a4;
-  --color-pink-dark: #884074;
-  --font-sans: "Cairo", sans-serif;
-  --shadow-sm: 0px 4px 8px 0px rgba(54, 23, 45, 0.05);
+  /* Backgrounds */
+  --color-bg-primary: #2d1b69;
+  --color-bg-secondary: #3a2580;
+  --color-bg-interactive: #4a2d9b;
+  --color-bg-card: #33206f;
+
+  /* Text */
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #d4c6ff;
+  --color-text-tertiary: #a594e0;
+
+  /* Accent - Cyan */
+  --color-accent-cyan: #0ff4c6;
+  --color-accent-cyan-light: #2dffd4;
+  --color-accent-cyan-opacity-50: rgba(13, 223, 212, 0.5);
+
+  /* Accent - Pink */
+  --color-accent-pink: #ff7eb6;
+  --color-accent-pink-light: #ff9cc7;
+  --color-accent-pink-lighter: #ffbdda;
+
+  /* Error - Red */
+  --color-error: #ff5a5f;
+  --color-error-hover: #ff7a7e;
+  --color-error-light: #ffb5b7;
+  --color-error-bg-opacity: rgba(255, 90, 95, 0.15);
+
+  /* Gradients */
+  --gradient-purple: linear-gradient(135deg, #2d1b69, #4a2d9b);
+  --gradient-accent: linear-gradient(135deg, #0ff4c6, #0bc4e2);
+
+  /* Font */
+  --font-sans: 'Cairo', sans-serif;
+
+  /* Shadows */
+  --shadow-sm: 0 4px 8px rgba(54, 23, 45, 0.05);
 }
