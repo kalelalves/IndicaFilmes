@@ -1,12 +1,12 @@
 import { BrowserRouter } from "react-router-dom";
-import { Login } from "./components/Login/Login";
-import { Register } from "./components/Register/Register";
+import { AppRoutes } from "./routes/AppRoutes";
 
 export function App() {
+  const isAuthenticated = false; // ainda hardcoded
+
   return (
     <BrowserRouter>
-      <Login />
-      {/* <Register /> */}
+      <AppRoutes isAuthenticated={isAuthenticated} />
     </BrowserRouter>
   );
 }
