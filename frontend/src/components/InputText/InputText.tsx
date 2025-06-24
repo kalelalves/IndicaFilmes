@@ -1,31 +1,31 @@
-import React from "react";
+import * as React from 'react'
 
 interface InputTextProps
   extends Omit<
     React.InputHTMLAttributes<HTMLInputElement>,
-    "size" | "onChange"
+    'size' | 'onChange'
   > {
-  label?: string;
-  placeholder?: string;
-  onChange?: (value: string) => void;
-  id?: string;
-  disabled?: boolean;
-  type?: React.HTMLInputTypeAttribute;
+  label?: string
+  placeholder?: string
+  onChange?: (value: string) => void
+  id?: string
+  disabled?: boolean
+  type?: React.HTMLInputTypeAttribute
 }
 
 export const InputText: React.FC<InputTextProps> = ({
   label,
   placeholder,
-  className = "",
+  className = '',
   id,
   onChange,
   disabled,
-  type = "text",
+  type = 'text',
   ...props
 }) => {
   const inputId =
     id ||
-    `input-${label?.toLowerCase().replace(/\s/g, "-") || crypto.randomUUID()}`;
+    `input-${label?.toLowerCase().replace(/\s/g, '-') || crypto.randomUUID()}`
 
   return (
     <div className="flex flex-col gap-1 w-full">
@@ -50,14 +50,14 @@ export const InputText: React.FC<InputTextProps> = ({
     bg-[var(--color-bg-secondary)] 
     outline-none 
     px-4 py-3 rounded-md 
-    text-[var(--color-text-primary)]
+    text-[var(--color-text-base)]
     placeholder-[var(--color-text-tertiary)] 
     transition-colors
-    ${disabled ? "opacity-50 pointer-events-none" : ""}
+    ${disabled ? 'opacity-50 pointer-events-none' : ''}
     ${className}
   `}
         {...props}
       />
     </div>
-  );
-};
+  )
+}
