@@ -1,16 +1,16 @@
-import { Routes, Route, useLocation } from "react-router-dom";
-import { Header } from "../components/Header/Header";
-import { Login } from "../pages/Login/Login";
-import { Register } from "../pages/Register/Register";
+import { Routes, Route, useLocation } from 'react-router-dom'
+import { Header } from '../components/Header/Header'
+import { Login } from '../pages/Login/Login'
+import { Register } from '../pages/Register/Register'
 
 interface AppRoutesProps {
-  isAuthenticated: boolean;
+  isAuthenticated: boolean
 }
 
 export const AppRoutes: React.FC<AppRoutesProps> = ({ isAuthenticated }) => {
-  const location = useLocation();
-  const hideHeaderRoutes: string[] = [];
-  const shouldShowHeader = !hideHeaderRoutes.includes(location.pathname);
+  const location = useLocation()
+  const hideHeaderRoutes: string[] = []
+  const shouldShowHeader = !hideHeaderRoutes.includes(location.pathname)
 
   return (
     <>
@@ -21,5 +21,5 @@ export const AppRoutes: React.FC<AppRoutesProps> = ({ isAuthenticated }) => {
         {/* Adicione outras rotas privadas aqui */}
       </Routes>
     </>
-  );
-};
+  )
+}
