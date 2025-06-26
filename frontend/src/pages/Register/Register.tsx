@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { z } from 'zod'
 import { api } from '../../handlers/user/userService'
 import { Text } from '../../components/Text/Text'
@@ -31,11 +32,15 @@ export function Register() {
   const [status, setStatus] = useState<'success' | 'error' | null>(null)
   const [message, setMessage] = useState<string | null>(null)
   const [fieldErrors, setFieldErrors] = useState<{ [key: string]: string }>({})
+  const navigate = useNavigate()
 
   const clearStatus = () => {
     setTimeout(() => {
       setStatus(null)
       setMessage(null)
+      if (status === 'success') {
+        navigate('/login')
+      }
     }, 3000)
   }
 
@@ -94,11 +99,19 @@ export function Register() {
       setPassword('')
       setConfirmPassword('')
       setFieldErrors({})
-      clearStatus()
+
+      setTimeout(() => {
+        setStatus(null)
+        setMessage(null)
+        navigate('/login')
+      }, 3000)
     } catch (error: any) {
       setStatus('error')
       setMessage(error.response?.data?.message || 'Erro ao registrar.')
-      clearStatus()
+      setTimeout(() => {
+        setStatus(null)
+        setMessage(null)
+      }, 3000)
     }
   }
 
