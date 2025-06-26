@@ -131,13 +131,14 @@ export const Login = () => {
       {status && (
         <div
           className={`
-            fixed top-20 left-1/2 transform -translate-x-1/2 px-6 py-3 rounded-lg shadow-md
-            text-white text-sm font-medium z-50 transition-all duration-300
-            ${status === 'success' ? 'bg-green-500' : 'bg-red-500'}
-          `}
+          fixed top-20 left-1/2 transform -translate-x-1/2 px-6 py-3 rounded-lg shadow-md
+          text-sm font-medium z-50 transition-all duration-300
+          ${status === 'success' ? 'bg-green-500 text-black' : 'bg-red-500 text-white'}
+        `}
         >
           {message}
         </div>
+
       )}
     </div>
   )
