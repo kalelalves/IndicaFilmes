@@ -31,7 +31,11 @@ export const Login = () => {
     }, 3000)
   }
 
-  const handleFieldChange = (field: string, value: string, setter: React.Dispatch<React.SetStateAction<string>>) => {
+  const handleInputChangeAndClearError = (
+    field: 'email' | 'password',
+    value: string,
+    setter: React.Dispatch<React.SetStateAction<string>>
+  ) => {
     setter(value)
     if (fieldErrors[field]) {
       setFieldErrors((prev) => {
@@ -100,7 +104,7 @@ export const Login = () => {
           label="Email"
           placeholder="Digite seu email"
           value={email}
-          onChange={(value) => handleFieldChange('email', value, setEmail)}
+          onChange={(value) => handleInputChangeAndClearError('email', value, setEmail)}
           error={!!fieldErrors.email}
           errorMessage={fieldErrors.email}
         />
@@ -110,7 +114,7 @@ export const Login = () => {
           placeholder="Digite sua senha"
           value={password}
           type="password"
-          onChange={(value) => handleFieldChange('password', value, setPassword)}
+          onChange={(value) => handleInputChangeAndClearError('password', value, setPassword)}
           error={!!fieldErrors.password}
           errorMessage={fieldErrors.password}
         />

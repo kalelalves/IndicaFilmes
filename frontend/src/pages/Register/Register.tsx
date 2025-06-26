@@ -44,8 +44,8 @@ export function Register() {
     }, 3000)
   }
 
-  const handleFieldChange = (
-    field: string,
+  const handleInputChangeAndClearError = (
+    field: 'name' | 'email' | 'password' | 'confirmPassword',
     value: string,
     setter: React.Dispatch<React.SetStateAction<string>>
   ) => {
@@ -129,7 +129,7 @@ export function Register() {
           label="Nome"
           placeholder="Digite seu nome"
           value={name}
-          onChange={(value) => handleFieldChange('name', value, setName)}
+          onChange={(value) => handleInputChangeAndClearError('name', value, setName)}
           error={!!fieldErrors.name}
           errorMessage={fieldErrors.name}
         />
@@ -137,7 +137,7 @@ export function Register() {
           label="Email"
           placeholder="Digite seu email"
           value={email}
-          onChange={(value) => handleFieldChange('email', value, setEmail)}
+          onChange={(value) => handleInputChangeAndClearError('email', value, setEmail)}
           error={!!fieldErrors.email}
           errorMessage={fieldErrors.email}
         />
@@ -145,7 +145,7 @@ export function Register() {
           label="Senha"
           placeholder="Digite sua senha"
           value={password}
-          onChange={(value) => handleFieldChange('password', value, setPassword)}
+          onChange={(value) => handleInputChangeAndClearError('password', value, setPassword)}
           type="password"
           error={!!fieldErrors.password}
           errorMessage={fieldErrors.password}
@@ -156,7 +156,7 @@ export function Register() {
           placeholder="Digite sua senha novamente"
           value={confirmPassword}
           onChange={(value) =>
-            handleFieldChange('confirmPassword', value, setConfirmPassword)
+            handleInputChangeAndClearError('confirmPassword', value, setConfirmPassword)
           }
           type="password"
           error={!!fieldErrors.confirmPassword}
