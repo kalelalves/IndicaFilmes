@@ -11,7 +11,7 @@ export const Text: React.FC<TextProps> = ({
 }) => {
   return (
     <span
-      className={`text-base text-[var(--color-text-base)] ${className}`}
+      className={`text-[var(--color-text-base)] ${className}`}
       {...props}
     >
       {children}

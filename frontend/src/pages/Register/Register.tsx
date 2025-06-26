@@ -80,6 +80,14 @@ export function Register() {
           type="password"
         />
 
+        <InputText
+          label="Confirme sua senha"
+          placeholder="Digite sua senha"
+          value={password}
+          onChange={setPassword}
+          type="password"
+        />
+
         <Button>Registrar</Button>
       </form>
 
