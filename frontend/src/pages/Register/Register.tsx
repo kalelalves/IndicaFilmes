@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { z } from 'zod'
 import { api } from '../../handlers/user/userService'
 import { Text } from '../../components/Text/Text'
 import { Button } from '../../components/Button/Button'
@@ -10,12 +12,52 @@ interface Register {
   password: string
 }
 
+const registerSchema = z
+  .object({
+    name: z.string().min(1, 'Nome obrigatório'),
+    email: z.string().email('E-mail inválido'),
+    password: z.string().min(6, 'A senha deve ter no mínimo 6 caracteres'),
+    confirmPassword: z.string().min(6, 'Confirmação de senha obrigatória'),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: 'As senhas não coincidem',
+    path: ['confirmPassword'],
+  })
+
 export function Register() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
   const [status, setStatus] = useState<'success' | 'error' | null>(null)
   const [message, setMessage] = useState<string | null>(null)
+  const [fieldErrors, setFieldErrors] = useState<{ [key: string]: string }>({})
+  const navigate = useNavigate()
+
+  const clearStatus = () => {
+    setTimeout(() => {
+      setStatus(null)
+      setMessage(null)
+      if (status === 'success') {
+        navigate('/login')
+      }
+    }, 3000)
+  }
+
+  const handleInputChangeAndClearError = (
+    field: 'name' | 'email' | 'password' | 'confirmPassword',
+    value: string,
+    setter: React.Dispatch<React.SetStateAction<string>>
+  ) => {
+    setter(value)
+    if (fieldErrors[field]) {
+      setFieldErrors((prev) => {
+        const updated = { ...prev }
+        delete updated[field]
+        return updated
+      })
+    }
+  }
 
   const fetchRegister = async (registerData: Register) => {
     const response = await api.post<Register>('/auth/register', registerData)
@@ -24,6 +66,27 @@ export function Register() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+
+    const result = registerSchema.safeParse({
+      name,
+      email,
+      password,
+      confirmPassword,
+    })
+
+    if (!result.success) {
+      const errors: { [key: string]: string } = {}
+      result.error.errors.forEach((err) => {
+        const field = err.path[0] as string
+        errors[field] = err.message
+      })
+
+      setFieldErrors(errors)
+      setStatus('error')
+      setMessage('Corrija os campos destacados.')
+      clearStatus()
+      return
+    }
 
     try {
       const response = await fetchRegister({ name, email, password })
@@ -34,15 +97,17 @@ export function Register() {
       setName('')
       setEmail('')
       setPassword('')
+      setConfirmPassword('')
+      setFieldErrors({})
 
       setTimeout(() => {
         setStatus(null)
         setMessage(null)
+        navigate('/login')
       }, 3000)
     } catch (error: any) {
       setStatus('error')
-      setMessage(error.response?.data?.message)
-
+      setMessage(error.response?.data?.message || 'Erro ao registrar.')
       setTimeout(() => {
         setStatus(null)
         setMessage(null)
@@ -64,28 +129,38 @@ export function Register() {
           label="Nome"
           placeholder="Digite seu nome"
           value={name}
-          onChange={setName}
+          onChange={(value) => handleInputChangeAndClearError('name', value, setName)}
+          error={!!fieldErrors.name}
+          errorMessage={fieldErrors.name}
         />
         <InputText
           label="Email"
           placeholder="Digite seu email"
           value={email}
-          onChange={setEmail}
+          onChange={(value) => handleInputChangeAndClearError('email', value, setEmail)}
+          error={!!fieldErrors.email}
+          errorMessage={fieldErrors.email}
         />
         <InputText
           label="Senha"
           placeholder="Digite sua senha"
           value={password}
-          onChange={setPassword}
+          onChange={(value) => handleInputChangeAndClearError('password', value, setPassword)}
           type="password"
+          error={!!fieldErrors.password}
+          errorMessage={fieldErrors.password}
         />
 
         <InputText
           label="Confirme sua senha"
-          placeholder="Digite sua senha"
-          value={password}
-          onChange={setPassword}
+          placeholder="Digite sua senha novamente"
+          value={confirmPassword}
+          onChange={(value) =>
+            handleInputChangeAndClearError('confirmPassword', value, setConfirmPassword)
+          }
           type="password"
+          error={!!fieldErrors.confirmPassword}
+          errorMessage={fieldErrors.confirmPassword}
         />
 
         <Button>Registrar</Button>
@@ -94,10 +169,10 @@ export function Register() {
       {status && message && (
         <div
           className={`
-      fixed top-20 left-1/2 transform -translate-x-1/2 px-6 py-3 rounded-lg shadow-md
-      text-white text-sm font-medium z-50 transition-all duration-300
-      ${status === 'success' ? 'bg-green-500' : 'bg-red-500'}
-    `}
+          fixed top-20 left-1/2 transform -translate-x-1/2 px-6 py-3 rounded-lg shadow-md
+          text-sm font-medium z-50 transition-all duration-300
+          ${status === 'success' ? 'bg-green-500 text-black' : 'bg-red-500 text-white'}
+        `}
         >
           {message}
         </div>
