@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { z } from 'zod'
 import { api } from '../../handlers/user/userService'
 import { useNavigate, Link } from 'react-router-dom'
 import { Text } from '../../components/Text/Text'
 import { Button } from '../../components/Button/Button'
 import { InputText } from '../../components/InputText/InputText'
+import { useAuth } from '../../context/AuthContext'
 
 interface Login {
   message: string
@@ -22,7 +23,15 @@ export const Login = () => {
   const [message, setMessage] = useState('')
   const [status, setStatus] = useState<'success' | 'error' | null>(null)
   const [fieldErrors, setFieldErrors] = useState<{ [key: string]: string }>({})
+  const { login, isAuthenticated } = useAuth()
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/dashboard', { replace: true })
+    }
+
+  }, [isAuthenticated, navigate])
 
   const clearStatus = () => {
     setTimeout(() => {
@@ -55,11 +64,12 @@ export const Login = () => {
       setFieldErrors({})
       setEmail('')
       setPassword('')
-      clearStatus()
 
       setTimeout(() => {
-        navigate('/dashboard')
-      }, 3000)
+        login()
+        clearStatus()
+      }, 1500)
+
     } catch (error: any) {
       setStatus('error')
       setMessage(error.response?.data?.message || 'Erro inesperado.')
